@@ -1,15 +1,18 @@
+import { FC } from "react";
+
+// Import modules.
 import { Icon } from "@types";
 
-interface Props {
+interface IDetailsCardProps {
     title: string;
     subtitle: string;
     icon: Icon;
     percentage: string;
 }
 
-const DetailsCard = ({
+const DetailsCard: FC<IDetailsCardProps> = ({
   title, subtitle, icon: IconElement, percentage,
-}: Props) => {
+}) => {
   return (
     <div className="text-center">
       <div className="flex items-center justify-center w-10 h-10 mx-auto mb-3 rounded-full bg-default-color sm:w-12 sm:h-12">

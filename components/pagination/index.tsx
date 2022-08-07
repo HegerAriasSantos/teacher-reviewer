@@ -1,10 +1,13 @@
 /* eslint-disable react/require-default-props */
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
-import { usePagination } from "@hooks";
-import _ from "lodash";
-import { Children } from "react";
+import { FC } from "react";
 
-interface PaginationProps {
+// Import packages.
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
+
+// Import modules.
+import { usePagination } from "@hooks";
+
+interface IPaginationProps {
     totalCount: number;
     siblingCount?: number;
     pageSize: number;
@@ -12,9 +15,9 @@ interface PaginationProps {
     changeCurrentPage: (page: number) => void;
 }
 
-const Pagination = ({
+const Pagination: FC<IPaginationProps> = ({
   totalCount, siblingCount = 0, pageSize, currentPage, changeCurrentPage,
-}: PaginationProps) => {
+}) => {
   const paginationRange = usePagination({
     currentPage,
     totalCount,
@@ -44,13 +47,14 @@ const Pagination = ({
         </button>
       )}
 
-      {Children.toArray(_.map(paginationRange, (pageNumber) => {
+      {paginationRange.map((pageNumber) => {
         if (pageNumber === "...") {
           return <div className="px-4 py-2 bg-white dark:bg-gray-800 dark:text-gray-50">...</div>;
         }
 
         return (
           <button
+            key={`pagination-page-${pageNumber}`}
             type="button"
             aria-current={pageNumber === currentPage ? "page" : "false"}
             onClick={() => changeCurrentPage(typeof pageNumber === "string" ? 0 : pageNumber)}
@@ -63,7 +67,7 @@ const Pagination = ({
             {pageNumber}
           </button>
         );
-      }))}
+      })}
 
       {currentPage !== lastPage && (
         <button

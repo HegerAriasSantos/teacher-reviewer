@@ -1,13 +1,17 @@
+import { FC, ReactNode } from "react";
+
+// Import packages.
 import Head from "next/head";
-import { ReactNode } from "react";
+
+// Import modules.
 import { Navigation, Footer } from "@components";
 
-interface Props {
+interface IMainLayoutProps {
   title: string;
   children: ReactNode;
 }
 
-const MainLayout = ({ children, title }: Props) => (
+const MainLayout: FC<IMainLayoutProps> = ({ children, title }) => (
   <>
     <Head>
       <title>{title}</title>

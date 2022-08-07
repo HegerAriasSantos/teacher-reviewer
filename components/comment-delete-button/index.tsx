@@ -1,11 +1,14 @@
+// Import packages.
 import Swal from "sweetalert2";
 import client from "apollo-client";
 import withReactContent from "sweetalert2-react-content";
 import { gql } from "@apollo/client";
 import { TrashIcon } from "@heroicons/react/outline";
-import { DefaultColorContext } from "contexts";
 
-interface Props {
+// Import modules.
+import { DefaultColorContext } from "@contexts";
+
+interface ICommentDeleteButtonProps {
     commentId: string | undefined;
     body: string | undefined;
 }
@@ -16,7 +19,7 @@ const QUERY_COMMENT = gql`
     }
 `;
 
-const CommentDeleteButton = ({ commentId, body }: Props) => {
+const CommentDeleteButton = ({ commentId, body }: ICommentDeleteButtonProps) => {
   const { color } = DefaultColorContext.useContext();
 
   const MySwal = withReactContent(Swal);

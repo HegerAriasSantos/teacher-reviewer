@@ -1,3 +1,4 @@
+// Import packages
 import Link from "next/link";
 import { AcademicCapIcon } from "@heroicons/react/outline";
 
@@ -31,24 +32,23 @@ const Footer = () => (
     </div>
     <div className="flex flex-col justify-between pt-5 pb-10 border-t sm:flex-row">
       <p className="text-md text-gray-100 flex-1">
-        © Copyright
+        {`© Copyright ${new Date().getFullYear()}`}
         {" "}
-        {new Date().getFullYear()}
-        {" "}
-        <span className="font-medium text-default-color">Teacher Reviewer</span>
-        . Todos los derechos reservados a sus respectivos desarrolladores.
+        <span className="font-medium text-gray-100 dark:text-default-color">Teacher Reviewer</span>
+        {" | "}
+        Todos los derechos reservados a sus respectivos desarrolladores.
       </p>
       <p className="text-md text-gray-100">
         Por
         {" "}
         <Link href="https://github.com/HegerAriasSantos" passHref>
-          <a className="font-semibold hover:text-default-color">Heger</a>
+          <a className="font-semibold hover:text-default-color">Heger Arias</a>
         </Link>
         {" "}
         y
         {" "}
         <Link href="https://github.com/xlCyanz" passHref>
-          <a className="font-semibold hover:text-default-color">Johan</a>
+          <a className="font-semibold hover:text-default-color">Johan Sierra</a>
         </Link>
       </p>
     </div>

@@ -1,14 +1,18 @@
-import _ from "lodash";
+import { useState } from "react";
+
+// Import packages.
 import Link from "next/link";
-import { ITabs } from "@types";
+import dynamic from "next/dynamic";
 import { useSession } from "next-auth/react";
-import { Children, useState } from "react";
 import {
   AcademicCapIcon,
   MenuIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import dynamic from "next/dynamic";
+
+// Import modules.
+import { ITabs } from "@types";
+
 import LoginButton from "../login-button";
 import NavProfile from "../nav-profile";
 
@@ -17,7 +21,7 @@ const DynamicToggleThemeWithNoSSR = dynamic(() => import("../toggle-theme"), { s
 const Navigation = () => {
   const { data: session } = useSession();
 
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const tabs: ITabs[] = [
     { name: "Profesores", href: "/teachers" },
@@ -39,8 +43,8 @@ const Navigation = () => {
           </a>
         </Link>
         <ul className="hidden lg:flex items-center">
-          {Children.toArray(_.map(tabs, (tab) => (
-            <li>
+          {tabs.map((tab) => (
+            <li key={tab.name}>
               <Link href={tab?.href} passHref>
                 <a
                   aria-label={tab?.name}
@@ -51,12 +55,14 @@ const Navigation = () => {
                 </a>
               </Link>
             </li>
-          )))}
+          ))}
+
           {session ? (
             <NavProfile />
           ) : (
             <LoginButton />
           )}
+
           <DynamicToggleThemeWithNoSSR />
         </ul>
         <div className="lg:hidden z-50">
@@ -101,7 +107,7 @@ const Navigation = () => {
                 </div>
                 <nav>
                   <ul className="space-y-4">
-                    {_.map(tabs, (tab) => (
+                    {tabs.map((tab) => (
                       <li key={`navigation-tab-${tab?.name}`}>
                         <Link href={tab?.href} passHref>
                           <a
@@ -114,9 +120,11 @@ const Navigation = () => {
                         </Link>
                       </li>
                     ))}
+
                     <li>
                       <DynamicToggleThemeWithNoSSR />
                     </li>
+
                     {session ? (
                       <NavProfile />
                     ) : (
@@ -130,7 +138,6 @@ const Navigation = () => {
         </div>
       </div>
     </div>
-  //
   );
 };
 

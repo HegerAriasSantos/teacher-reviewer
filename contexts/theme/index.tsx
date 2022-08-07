@@ -1,9 +1,9 @@
 /* eslint-disable no-use-before-define */
 import React, {
-  createContext, ReactNode, useCallback, useEffect, useMemo, useState,
+  createContext, FC, ReactNode, useCallback, useEffect, useMemo, useState,
 } from "react";
 
-interface ProviderProps {
+interface IProviderProps {
   children: ReactNode
 }
 
@@ -35,8 +35,8 @@ const getInitialTheme = () => {
   return "light";
 };
 
-const Provider = ({ children }: ProviderProps) => {
-  const [theme, setTheme] = useState<string>(getInitialTheme);
+const Provider: FC<IProviderProps> = ({ children }) => {
+  const [theme, setTheme] = useState(getInitialTheme);
 
   const rawSetTheme = (rawTheme: string) => {
     if (typeof window !== "undefined") {
